@@ -22,7 +22,6 @@ import { generateDashboardPDF } from '../../lib/reportPdfUtils';
 import { getHydraTotalItems } from '../../lib/hydraUtils';
 import { Button, Dropdown, Space } from 'antd';
 import { DownloadOutlined, FilePdfOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
 
 const COLORS = ['#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 

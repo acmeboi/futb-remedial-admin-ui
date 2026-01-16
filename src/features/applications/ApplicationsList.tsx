@@ -8,11 +8,9 @@ import { TableSkeleton } from '../../components/ui/Skeleton';
 import { formatDate } from '../../lib/utils';
 import { generateApplicationsPDFCompact, generateApplicationsPDFDetailed } from '../../lib/pdfUtils';
 import { generateApplicationsExcel } from '../../lib/excelUtils';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { useToast } from '../../components/ui/ToastContainer';
 import type { Application } from '../../lib/types';
 import { Button, Dropdown, Space } from 'antd';
-import type { MenuProps } from 'antd';
 import { DownloadOutlined, FilePdfOutlined, FileExcelOutlined, FileTextOutlined } from '@ant-design/icons';
 
 export function ApplicationsList() {

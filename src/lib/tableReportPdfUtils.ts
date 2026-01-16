@@ -371,6 +371,7 @@ export function generateTableReportPDF(data: TableReportData) {
   }
   
   // Add page numbers
+  // @ts-ignore - jsPDF getNumberOfPages method exists but TypeScript types may not include it
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);

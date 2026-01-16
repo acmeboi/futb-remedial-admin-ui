@@ -87,7 +87,7 @@ export function generateApplicationsExcel(applications: ApplicationWithResults[]
       ]);
     } else {
       // Multiple O-Level results - create a row for each
-      oLevelResults.forEach((result, index) => {
+      oLevelResults.forEach((result) => {
         const examType = result.exam_type || 'N/A';
         const examYear = result.exam_year || 'N/A';
         const examNumber = result.exam_number || 'N/A';

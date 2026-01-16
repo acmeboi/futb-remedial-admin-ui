@@ -8,7 +8,6 @@ import { formatDate, formatDateTime } from '../../lib/utils';
 import type { Payment } from '../../lib/types';
 import { Button, Dropdown, Space } from 'antd';
 import { DownloadOutlined, FileExcelOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
 
 export function PaymentsList() {
   const [page, setPage] = useState(1);
@@ -163,7 +162,6 @@ export function PaymentsList() {
           />
           <div className="flex items-end">
             <Button
-              variant="secondary"
               onClick={() => {
                 setDateFrom('');
                 setDateTo('');
@@ -187,14 +185,12 @@ export function PaymentsList() {
         </div>
         <div className="flex gap-2">
           <Button
-            variant="secondary"
             disabled={!hasPrevious}
             onClick={() => setPage(page - 1)}
           >
             Previous
           </Button>
           <Button
-            variant="secondary"
             disabled={!hasNext}
             onClick={() => setPage(page + 1)}
           >

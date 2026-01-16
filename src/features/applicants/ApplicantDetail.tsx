@@ -5,7 +5,6 @@ import { formatDate, formatDateTime } from '../../lib/utils';
 import { getFileUrl } from '../../lib/apiUtils';
 import { Button, Dropdown, Space } from 'antd';
 import { DownloadOutlined, FileExcelOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
 
 export function ApplicantDetail() {
   const { id } = useParams<{ id: string }>();

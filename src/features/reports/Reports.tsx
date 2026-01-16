@@ -5,7 +5,6 @@ import { usePayments } from '../../hooks/usePayments';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import {
-  StatCardSkeleton,
   ChartSkeleton,
   CardSkeleton,
 } from '../../components/ui/Skeleton';
@@ -16,7 +15,6 @@ import { generateTableReportPDF } from '../../lib/tableReportPdfUtils';
 import { getHydraTotalItems } from '../../lib/hydraUtils';
 import { Button, Dropdown, Space } from 'antd';
 import { DownloadOutlined, FilePdfOutlined, FileTextOutlined, FileExcelOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
 
 export function Reports() {
   const [dateFrom, setDateFrom] = useState('');
@@ -95,7 +93,7 @@ export function Reports() {
 
   const statusChartData = Object.entries(statusData).map(([name, value]) => ({
     name,
-    value,
+    value: Number(value),
   }));
 
   // Monthly applications
@@ -106,7 +104,7 @@ export function Reports() {
   }, {});
 
   const monthlyChartData = Object.entries(monthlyData)
-    .map(([name, value]) => ({ name, applications: value }))
+    .map(([name, value]) => ({ name, applications: Number(value) }))
     .sort((a, b) => new Date(a.name).getTime() - new Date(b.name).getTime());
 
   // Payment amounts by month
@@ -118,7 +116,7 @@ export function Reports() {
   }, {});
 
   const paymentChartData = Object.entries(paymentMonthlyData)
-    .map(([name, value]) => ({ name, amount: value }))
+    .map(([name, value]) => ({ name, amount: Number(value) }))
     .sort((a, b) => new Date(a.name).getTime() - new Date(b.name).getTime());
 
   const handleDownloadPDFReport = async () => {
@@ -276,7 +274,7 @@ export function Reports() {
           <>
             <ChartSkeleton height={300} />
             <ChartSkeleton height={300} />
-            <ChartSkeleton height={300} className="lg:col-span-2" />
+            <ChartSkeleton height={300} />
           </>
         ) : (
           <>

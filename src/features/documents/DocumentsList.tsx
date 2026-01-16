@@ -26,27 +26,27 @@ export function DocumentsList({ applicationId }: DocumentsListProps) {
     setShowConfirm(true);
   };
 
-  const handleDownload = (document: ApplicationDocument) => {
+  const handleDownload = (doc: ApplicationDocument) => {
     try {
-      const fileUrl = getFileUrl(document.document_url);
+      const fileUrl = getFileUrl(doc.document_url);
       if (!fileUrl) {
         toast.showToast('Document URL not available', 'error');
         return;
       }
 
       // Get the document type name for the filename
-      const docTypeField = (document as any).document || document.document_type;
+      const docTypeField = (doc as any).document || doc.document_type;
       const docType = typeof docTypeField === 'object' ? docTypeField : null;
       const docTypeName = docType?.name || 'document';
       
       // Extract file extension from URL or use a default
-      const urlParts = document.document_url.split('.');
+      const urlParts = doc.document_url.split('.');
       const extension = urlParts.length > 1 ? urlParts[urlParts.length - 1] : 'pdf';
       
       // Create a temporary anchor element to trigger download
       const link = document.createElement('a');
       link.href = fileUrl;
-      link.download = `${docTypeName}-${document.id}.${extension}`;
+      link.download = `${docTypeName}-${doc.id}.${extension}`;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       

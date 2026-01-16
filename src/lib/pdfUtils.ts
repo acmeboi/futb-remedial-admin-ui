@@ -129,6 +129,7 @@ export function generateApplicationsPDFCompact(applications: ApplicationWithResu
   });
   
   // Add page numbers
+  // @ts-ignore - jsPDF getNumberOfPages method exists but TypeScript types may not include it
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
@@ -230,7 +231,7 @@ export function generateApplicationsPDFDetailed(applications: ApplicationWithRes
     currentY = (doc as any).lastAutoTable.finalY + 3;
     
     // Add O-Level results tables for each result
-    oLevelResults.forEach((result, resultIndex) => {
+        oLevelResults.forEach((result) => {
       // Check if we need a new page
       if (currentY > 180) {
         doc.addPage();
@@ -290,6 +291,7 @@ export function generateApplicationsPDFDetailed(applications: ApplicationWithRes
   });
   
   // Add page numbers
+  // @ts-ignore - jsPDF getNumberOfPages method exists but TypeScript types may not include it
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);

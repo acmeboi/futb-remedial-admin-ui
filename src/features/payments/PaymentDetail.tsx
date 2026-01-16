@@ -95,7 +95,6 @@ export function PaymentDetail() {
               </div>
               <div className="pt-4">
                 <Button
-                  variant="secondary"
                   onClick={() => navigate(`/applicants/${applicant.id}`)}
                 >
                   View Applicant Details

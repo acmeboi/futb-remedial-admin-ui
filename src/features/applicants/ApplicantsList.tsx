@@ -87,7 +87,7 @@ export function ApplicantsList() {
           </div>
           {searchInput && (
             <Button
-              variant="ghost"
+              type="text"
               onClick={() => {
                 setSearchInput('');
                 setPage(1);
