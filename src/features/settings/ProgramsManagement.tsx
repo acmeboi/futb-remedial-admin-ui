@@ -96,17 +96,22 @@ export function ProgramsManagement() {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-900">Program Management</h2>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsCreating(!isCreating)}>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Program Management</h2>
+        <Button 
+          type="primary" 
+          icon={<PlusOutlined />} 
+          onClick={() => setIsCreating(!isCreating)}
+          className="w-full sm:w-auto"
+        >
           {isCreating ? 'Cancel' : 'Add Program'}
         </Button>
       </div>
 
       {isCreating && (
         <Card>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4 sm:p-6">
             <Input
               label="Program Name"
               {...register('program_name')}
@@ -128,17 +133,23 @@ export function ProgramsManagement() {
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
               />
             </div>
-            <div className="flex justify-end gap-2">
-              <Button
-                onClick={() => {
-                  setIsCreating(false);
-                  setEditingId(null);
-                  reset();
-                }}
-              >
-                Cancel
-              </Button>
-            <Button type="primary" htmlType="submit" loading={isSubmitting}>
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-2">
+            <Button
+              onClick={() => {
+                setIsCreating(false);
+                setEditingId(null);
+                reset();
+              }}
+              className="w-full sm:w-auto"
+            >
+              Cancel
+            </Button>
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              loading={isSubmitting}
+              className="w-full sm:w-auto"
+            >
               {editingId ? 'Update' : 'Create'}
             </Button>
             </div>

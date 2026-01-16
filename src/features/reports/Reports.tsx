@@ -154,10 +154,10 @@ export function Reports() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Reports & Analytics</h1>
-        <Space>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Reports & Analytics</h1>
+        <Space size="small" className="w-full sm:w-auto flex flex-col sm:flex-row">
           <Dropdown
             menu={{
               items: [
@@ -193,13 +193,16 @@ export function Reports() {
               ],
             }}
             trigger={['click']}
+            className="w-full sm:w-auto"
           >
             <Button 
               type="primary" 
               icon={<DownloadOutlined />}
               loading={isLoading}
+              className="w-full sm:w-auto"
             >
-              Download Reports
+              <span className="hidden sm:inline">Download Reports</span>
+              <span className="sm:hidden">Download</span>
             </Button>
           </Dropdown>
         </Space>
@@ -207,8 +210,8 @@ export function Reports() {
 
       <div id="reports-content">
       {/* Date Filters */}
-      <Card className="p-4">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <Card className="p-3 sm:p-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
           <Input
             type="date"
             label="From Date"
@@ -227,6 +230,7 @@ export function Reports() {
                 setDateFrom('');
                 setDateTo('');
               }}
+              className="w-full sm:w-auto"
             >
               Clear Filters
             </Button>
@@ -235,32 +239,32 @@ export function Reports() {
       </Card>
 
       {/* Statistics Summary */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {isLoading ? (
           Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)
         ) : (
           <>
-            <Card className="p-4">
-              <p className="text-sm font-medium text-gray-600">Total Applicants</p>
-              <p className="text-2xl font-semibold text-gray-900">
+            <Card className="p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Total Applicants</p>
+              <p className="text-xl sm:text-2xl font-semibold text-gray-900">
                 {getHydraTotalItems(applicantsData)}
               </p>
             </Card>
-            <Card className="p-4">
-              <p className="text-sm font-medium text-gray-600">Total Applications</p>
-              <p className="text-2xl font-semibold text-gray-900">
+            <Card className="p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Total Applications</p>
+              <p className="text-xl sm:text-2xl font-semibold text-gray-900">
                 {getHydraTotalItems(applicationsData)}
               </p>
             </Card>
-            <Card className="p-4">
-              <p className="text-sm font-medium text-gray-600">Total Payments</p>
-              <p className="text-2xl font-semibold text-gray-900">
+            <Card className="p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Total Payments</p>
+              <p className="text-xl sm:text-2xl font-semibold text-gray-900">
                 {getHydraTotalItems(paymentsData)}
               </p>
             </Card>
-            <Card className="p-4">
-              <p className="text-sm font-medium text-gray-600">Total Revenue</p>
-              <p className="text-2xl font-semibold text-gray-900">
+            <Card className="p-3 sm:p-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Total Revenue</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 break-words">
                 ₦{payments.reduce((sum: number, p: any) => sum + parseFloat(p.amount || '0'), 0).toLocaleString('en-NG', { minimumFractionDigits: 2 })}
               </p>
             </Card>
@@ -269,7 +273,7 @@ export function Reports() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         {isLoading ? (
           <>
             <ChartSkeleton height={300} />

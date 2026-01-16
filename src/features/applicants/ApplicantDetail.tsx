@@ -64,21 +64,21 @@ export function ApplicantDetail() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="flex items-center flex-1 min-w-0">
           <Button
             type="text"
             onClick={() => navigate('/applicants')}
-            className="mr-4"
+            className="mr-2 sm:mr-4 flex-shrink-0"
             icon={<ArrowLeftOutlined />}
           >
-            Back
+            <span className="hidden sm:inline">Back</span>
           </Button>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">
             {applicant.first_name} {applicant.last_name}
           </h1>
         </div>
-        <Space>
+        <Space className="w-full sm:w-auto">
           <Dropdown
             menu={{
               items: [
@@ -91,10 +91,12 @@ export function ApplicantDetail() {
               ],
             }}
             trigger={['click']}
+            className="w-full sm:w-auto"
           >
             <Button 
               type="primary" 
               icon={<DownloadOutlined />}
+              className="w-full sm:w-auto"
             >
               Export
             </Button>
@@ -102,7 +104,7 @@ export function ApplicantDetail() {
         </Space>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         <Card title="Personal Information">
           <dl className="space-y-4">
             <div>

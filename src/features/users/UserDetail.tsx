@@ -86,28 +86,34 @@ export function UserDetail() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="flex items-center flex-1 min-w-0">
         <Button
           type="text"
           onClick={() => navigate('/users')}
-          className="mr-4"
+          className="mr-2 sm:mr-4 flex-shrink-0"
           icon={<ArrowLeftOutlined />}
         >
-          Back
+          <span className="hidden sm:inline">Back</span>
         </Button>
-          <h1 className="text-2xl font-bold text-gray-900">User Details</h1>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">User Details</h1>
         </div>
         {!isEditing && (
-          <Button type="primary" icon={<EditOutlined />} onClick={() => setIsEditing(true)}>
-            Edit User
+          <Button 
+            type="primary" 
+            icon={<EditOutlined />} 
+            onClick={() => setIsEditing(true)}
+            className="w-full sm:w-auto"
+          >
+            <span className="hidden sm:inline">Edit User</span>
+            <span className="sm:hidden">Edit</span>
           </Button>
         )}
       </div>
 
       {isEditing ? (
         <Card>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6 p-4 sm:p-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email
@@ -144,7 +150,7 @@ export function UserDetail() {
               )}
             </div>
 
-            <div className="flex justify-end gap-4">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
               <Button
                 onClick={() => {
                   setIsEditing(false);
@@ -152,10 +158,17 @@ export function UserDetail() {
                   setValue('roles', user.roles || []);
                 }}
                 icon={<CloseOutlined />}
+                className="w-full sm:w-auto"
               >
                 Cancel
               </Button>
-              <Button type="primary" htmlType="submit" loading={isSubmitting} icon={<SaveOutlined />}>
+              <Button 
+                type="primary" 
+                htmlType="submit" 
+                loading={isSubmitting} 
+                icon={<SaveOutlined />}
+                className="w-full sm:w-auto"
+              >
                 Update User
               </Button>
             </div>

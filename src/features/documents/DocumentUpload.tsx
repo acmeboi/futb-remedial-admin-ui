@@ -60,14 +60,14 @@ export function DocumentUpload({ applicationId, onSuccess }: DocumentUploadProps
 
   return (
     <Card title="Upload Document">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4 sm:p-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Document Type
           </label>
           <select
             {...register('document_type')}
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm"
           >
             <option value="">Select document type</option>
             {documentTypes.map((type) => (
@@ -88,7 +88,7 @@ export function DocumentUpload({ applicationId, onSuccess }: DocumentUploadProps
           <input
             type="file"
             {...register('documentFile')}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+            className="block w-full text-xs sm:text-sm text-gray-500 file:mr-2 sm:file:mr-4 file:py-1.5 sm:file:py-2 file:px-2 sm:file:px-4 file:rounded-md file:border-0 file:text-xs sm:file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
           />
           {errors.documentFile && (
             <p className="mt-1 text-sm text-red-600">{errors.documentFile.message}</p>
@@ -96,7 +96,13 @@ export function DocumentUpload({ applicationId, onSuccess }: DocumentUploadProps
         </div>
 
         <div className="flex justify-end">
-          <Button type="primary" htmlType="submit" loading={isUploading} icon={<UploadOutlined />}>
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            loading={isUploading} 
+            icon={<UploadOutlined />}
+            className="w-full sm:w-auto"
+          >
             Upload Document
           </Button>
         </div>

@@ -99,9 +99,9 @@ export function PaymentsList() {
 
   return (
     <div>
-      <div className="mb-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
-        <Space>
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Payments</h1>
+        <Space size="small" className="w-full sm:w-auto flex flex-col sm:flex-row">
           <Dropdown
             menu={{
               items: [
@@ -114,10 +114,12 @@ export function PaymentsList() {
               ],
             }}
             trigger={['click']}
+            className="w-full sm:w-auto"
           >
             <Button 
               type="primary" 
               icon={<DownloadOutlined />}
+              className="w-full sm:w-auto"
             >
               Export
             </Button>
@@ -126,28 +128,28 @@ export function PaymentsList() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-6">
-        <Card className="p-4">
-          <p className="text-sm font-medium text-gray-600">Total Payments</p>
-          <p className="text-2xl font-semibold text-gray-900">{totalItems}</p>
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-3 mb-4 sm:mb-6">
+        <Card className="p-3 sm:p-4">
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Total Payments</p>
+          <p className="text-xl sm:text-2xl font-semibold text-gray-900">{totalItems}</p>
         </Card>
-        <Card className="p-4">
-          <p className="text-sm font-medium text-gray-600">Total Amount</p>
-          <p className="text-2xl font-semibold text-gray-900">
+        <Card className="p-3 sm:p-4">
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Total Amount</p>
+          <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 break-words">
             ₦{totalAmount.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
           </p>
         </Card>
-        <Card className="p-4">
-          <p className="text-sm font-medium text-gray-600">Average Payment</p>
-          <p className="text-2xl font-semibold text-gray-900">
+        <Card className="p-3 sm:p-4">
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Average Payment</p>
+          <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 break-words">
             ₦{totalItems > 0 ? (totalAmount / totalItems).toLocaleString('en-NG', { minimumFractionDigits: 2 }) : '0.00'}
           </p>
         </Card>
       </div>
 
       {/* Filters */}
-      <Card className="mb-4 p-4">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <Card className="mb-4 p-3 sm:p-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
           <Input
             type="date"
             label="From Date"
@@ -166,6 +168,7 @@ export function PaymentsList() {
                 setDateFrom('');
                 setDateTo('');
               }}
+              className="w-full sm:w-auto"
             >
               Clear Filters
             </Button>
@@ -179,20 +182,22 @@ export function PaymentsList() {
         onRowClick={(row) => navigate(`/payments/${row.id}`)}
       />
 
-      <div className="mt-4 flex justify-between items-center">
-        <div className="text-sm text-gray-700">
+      <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+        <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
           Showing {payments.length} of {totalItems} payments
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <Button
             disabled={!hasPrevious}
             onClick={() => setPage(page - 1)}
+            className="flex-1 sm:flex-none"
           >
             Previous
           </Button>
           <Button
             disabled={!hasNext}
             onClick={() => setPage(page + 1)}
+            className="flex-1 sm:flex-none"
           >
             Next
           </Button>

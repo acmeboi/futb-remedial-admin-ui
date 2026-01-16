@@ -83,29 +83,34 @@ export function ApplicationDetail() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="flex items-center flex-1 min-w-0">
           <Button
             type="text"
             onClick={() => navigate('/applications')}
-            className="mr-4"
+            className="mr-2 sm:mr-4 flex-shrink-0"
             icon={<ArrowLeftOutlined />}
           >
-            Back
+            <span className="hidden sm:inline">Back</span>
           </Button>
-          <h1 className="text-2xl font-bold text-gray-900">Application Details</h1>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">Application Details</h1>
         </div>
-        <div className="flex items-center gap-4">
-          <Badge variant={getStatusVariant(application.status) as any}>
+        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+          <Badge variant={getStatusVariant(application.status) as any} className="text-xs">
             {application.status}
           </Badge>
-          <Button type="primary" onClick={() => setShowStatusModal(true)}>
-            Update Status
+          <Button 
+            type="primary" 
+            onClick={() => setShowStatusModal(true)}
+            className="flex-1 sm:flex-none"
+          >
+            <span className="hidden sm:inline">Update Status</span>
+            <span className="sm:hidden">Update</span>
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Application Information */}
         <Card title="Application Information">
           <dl className="space-y-4">
@@ -168,11 +173,11 @@ export function ApplicationDetail() {
                 // Check if this is the new format with oLevelSubjects array
                 if (result.oLevelSubjects && Array.isArray(result.oLevelSubjects) && result.oLevelSubjects.length > 0) {
                   return (
-                    <div key={result.id} className="border rounded-lg p-4 bg-gray-50">
+                    <div key={result.id} className="border rounded-lg p-3 sm:p-4 bg-gray-50">
                       {result.exam_type && (
                         <div className="mb-3 pb-2 border-b">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-semibold text-gray-900">
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                            <span className="text-xs sm:text-sm font-semibold text-gray-900 break-words">
                               {result.exam_type}
                               {result.exam_year && ` - ${result.exam_year}`}
                             </span>
@@ -181,7 +186,7 @@ export function ApplicationDetail() {
                             )}
                           </div>
                           {result.center_name && (
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-gray-500 mt-1 break-words">
                               {result.center_name}
                               {result.center_number && ` (${result.center_number})`}
                             </p>
@@ -192,9 +197,9 @@ export function ApplicationDetail() {
                         {result.oLevelSubjects.map((subject: any) => {
                           const subjectName = subject.subject_name || subject.name || 'Unknown';
                           return (
-                            <div key={subject.id} className="flex justify-between items-center p-2 bg-white rounded">
-                              <span className="text-sm font-medium text-gray-900">{subjectName}</span>
-                              <Badge variant="info">{subject.grade}</Badge>
+                            <div key={subject.id} className="flex justify-between items-center p-2 bg-white rounded gap-2">
+                              <span className="text-xs sm:text-sm font-medium text-gray-900 truncate flex-1 min-w-0">{subjectName}</span>
+                              <Badge variant="info" className="flex-shrink-0">{subject.grade}</Badge>
                             </div>
                           );
                         })}
@@ -213,9 +218,9 @@ export function ApplicationDetail() {
                 const grade = result.grade || subject?.grade || 'N/A';
                 
                 return (
-                  <div key={result.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                    <span className="text-sm font-medium text-gray-900">{subjectName}</span>
-                    <Badge variant="info">{grade}</Badge>
+                  <div key={result.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg gap-2">
+                    <span className="text-xs sm:text-sm font-medium text-gray-900 truncate flex-1 min-w-0">{subjectName}</span>
+                    <Badge variant="info" className="flex-shrink-0">{grade}</Badge>
                   </div>
                 );
               })}

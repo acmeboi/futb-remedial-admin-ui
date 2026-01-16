@@ -9,13 +9,10 @@ import type { User } from '../../lib/types';
 import { PlusOutlined } from '@ant-design/icons';
 
 export function UsersList() {
-  const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   
   const { data, isLoading, error } = useUsers({
-    page,
-    itemsPerPage: 20,
     search: search || undefined,
   });
 
@@ -38,8 +35,6 @@ export function UsersList() {
 
   const users = data?.['hydra:member'] || [];
   const totalItems = data?.['hydra:totalItems'] || 0;
-  const hasNext = data?.['hydra:view']?.['hydra:next'];
-  const hasPrevious = data?.['hydra:view']?.['hydra:previous'];
 
   const columns = [
     { header: 'ID', accessor: 'id' as keyof User },
@@ -58,10 +53,16 @@ export function UsersList() {
 
   return (
     <div>
-      <div className="mb-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/users/new')}>
-          Add User
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Users</h1>
+        <Button 
+          type="primary" 
+          icon={<PlusOutlined />} 
+          onClick={() => navigate('/users/new')}
+          className="w-full sm:w-auto"
+        >
+          <span className="hidden sm:inline">Add User</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </div>
 
@@ -72,9 +73,8 @@ export function UsersList() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setPage(1);
           }}
-          className="max-w-md"
+          className="w-full sm:max-w-md"
         />
       </div>
 
@@ -84,23 +84,9 @@ export function UsersList() {
         onRowClick={(row) => navigate(`/users/${row.id}`)}
       />
 
-      <div className="mt-4 flex justify-between items-center">
-        <div className="text-sm text-gray-700">
-          Showing {users.length} of {totalItems} users
-        </div>
-        <div className="flex gap-2">
-          <Button
-            disabled={!hasPrevious}
-            onClick={() => setPage(page - 1)}
-          >
-            Previous
-          </Button>
-          <Button
-            disabled={!hasNext}
-            onClick={() => setPage(page + 1)}
-          >
-            Next
-          </Button>
+      <div className="mt-4">
+        <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
+          Showing {users.length} of {totalItems} admin users
         </div>
       </div>
     </div>

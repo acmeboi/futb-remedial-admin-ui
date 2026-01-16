@@ -1,7 +1,6 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from 'antd';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -10,19 +9,17 @@ import { Input } from '../../components/ui/Input';
 import { useCreateUser } from '../../hooks/useUsers';
 
 const userSchema = z.object({
+  first_name: z.string().min(1, 'First name is required'),
+  last_name: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  roles: z.array(z.string()).min(1, 'At least one role is required'),
 });
 
 type UserFormData = z.infer<typeof userSchema>;
 
-const availableRoles = ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'];
-
 export function UserCreate() {
   const navigate = useNavigate();
   const createUser = useCreateUser();
-  const [selectedRoles, setSelectedRoles] = useState<string[]>(['ROLE_USER']);
 
   const {
     register,
@@ -30,49 +27,52 @@ export function UserCreate() {
     formState: { errors, isSubmitting },
   } = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
-    defaultValues: {
-      roles: ['ROLE_USER'],
-    },
   });
-
-  const toggleRole = (role: string) => {
-    if (selectedRoles.includes(role)) {
-      setSelectedRoles(selectedRoles.filter(r => r !== role));
-    } else {
-      setSelectedRoles([...selectedRoles, role]);
-    }
-  };
 
   const onSubmit = async (data: UserFormData) => {
     try {
       await createUser.mutateAsync({
         email: data.email,
         password: data.password,
-        roles: selectedRoles,
-      } as any); // Password is handled server-side
+        first_name: data.first_name,
+        last_name: data.last_name,
+      });
       navigate('/users');
-    } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to create user');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to create user';
+      alert(errorMessage);
     }
   };
 
   return (
     <div>
-      <div className="mb-6 flex items-center">
+      <div className="mb-4 sm:mb-6 flex items-center">
         <Button
           type="text"
           onClick={() => navigate('/users')}
-          className="mr-4"
+          className="mr-2 sm:mr-4 flex-shrink-0"
           icon={<ArrowLeftOutlined />}
         >
-          Back
+          <span className="hidden sm:inline">Back</span>
         </Button>
-        <h1 className="text-2xl font-bold text-gray-900">Create New User</h1>
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">Create New User</h1>
       </div>
 
       <Card>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6 p-4 sm:p-6">
           <div className="space-y-4">
+            <Input
+              label="First Name"
+              {...register('first_name')}
+              error={errors.first_name?.message}
+            />
+            <Input
+              label="Last Name"
+              {...register('last_name')}
+              error={errors.last_name?.message}
+            />
             <Input
               label="Email"
               type="email"
@@ -85,36 +85,21 @@ export function UserCreate() {
               {...register('password')}
               error={errors.password?.message}
             />
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Roles
-              </label>
-              <div className="space-y-2">
-                {availableRoles.map((role) => (
-                  <label key={role} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={selectedRoles.includes(role)}
-                      onChange={() => toggleRole(role)}
-                      className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                    />
-                    <span className="ml-2 text-sm text-gray-900">{role}</span>
-                  </label>
-                ))}
-              </div>
-              {selectedRoles.length === 0 && (
-                <p className="mt-1 text-sm text-red-600">At least one role is required</p>
-              )}
-            </div>
           </div>
 
-          <div className="flex justify-end gap-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
             <Button
               onClick={() => navigate('/users')}
+              className="w-full sm:w-auto"
             >
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" loading={isSubmitting} disabled={selectedRoles.length === 0}>
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              loading={isSubmitting}
+              className="w-full sm:w-auto"
+            >
               Create User
             </Button>
           </div>

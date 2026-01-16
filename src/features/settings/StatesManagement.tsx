@@ -34,10 +34,10 @@ export function StatesManagement() {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-gray-900">States & LGAs Management</h2>
+    <div className="space-y-4 sm:space-y-6">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-900">States & LGAs Management</h2>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         <Card title="States">
           <Table data={states} columns={stateColumns} />
         </Card>

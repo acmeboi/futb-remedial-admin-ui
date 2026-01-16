@@ -227,10 +227,10 @@ export function Login() {
             <div className="mx-auto h-16 w-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
               <LockClosedIcon className="h-8 w-8 text-white" />
             </div>
-            <h2 className="mt-6 text-4xl font-extrabold text-gray-900">
+            <h2 className="mt-4 sm:mt-6 text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900">
               Remedial Portal
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-xs sm:text-sm text-gray-600">
               Sign in to your admin account
             </p>
           </div>

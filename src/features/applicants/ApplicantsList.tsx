@@ -62,12 +62,18 @@ export function ApplicantsList() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header Section */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Applicants</h1>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/applicants/new')}>
-          Add Applicant
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Applicants</h1>
+        <Button 
+          type="primary" 
+          icon={<PlusOutlined />} 
+          onClick={() => navigate('/applicants/new')}
+          className="w-full sm:w-auto"
+        >
+          <span className="hidden sm:inline">Add Applicant</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </div>
 
@@ -123,23 +129,30 @@ export function ApplicantsList() {
               data={applicants}
               columns={columns}
               onRowClick={(row) => navigate(`/applicants/${row.id}`)}
+              collapsible={true}
             />
 
-            <div className="mt-4 flex justify-between items-center">
-              <div className="text-sm text-gray-700">
+            <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+              <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
                 Showing {applicants.length} of {totalItems} applicants
-                {debouncedSearch && ` matching "${debouncedSearch}"`}
+                {debouncedSearch && (
+                  <span className="block sm:inline sm:ml-1">
+                    matching "{debouncedSearch}"
+                  </span>
+                )}
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 w-full sm:w-auto">
                 <Button
                   disabled={!hasPrevious || isLoading}
                   onClick={() => setPage(page - 1)}
+                  className="flex-1 sm:flex-none"
                 >
                   Previous
                 </Button>
                 <Button
                   disabled={!hasNext || isLoading}
                   onClick={() => setPage(page + 1)}
+                  className="flex-1 sm:flex-none"
                 >
                   Next
                 </Button>

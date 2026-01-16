@@ -24,8 +24,8 @@ export function DocumentTypesManagement() {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-gray-900">Document Types Management</h2>
+    <div className="space-y-4 sm:space-y-6">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Document Types Management</h2>
 
       {isLoading ? (
         <div className="text-center py-12">

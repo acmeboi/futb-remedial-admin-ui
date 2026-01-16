@@ -133,10 +133,10 @@ export function ApplicationsList() {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Applications</h1>
-        <Space>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Applications</h1>
+        <Space size="small" className="w-full sm:w-auto flex flex-col sm:flex-row">
           <Dropdown
             menu={{
               items: [
@@ -164,14 +164,17 @@ export function ApplicationsList() {
               ],
             }}
             trigger={['click']}
+            className="w-full sm:w-auto"
           >
             <Button 
               type="primary" 
               icon={<DownloadOutlined />}
               loading={isGeneratingReport}
               disabled={!reportData || reportData.length === 0}
+              className="w-full sm:w-auto"
             >
-              Download Reports
+              <span className="hidden sm:inline">Download Reports</span>
+              <span className="sm:hidden">Download</span>
             </Button>
           </Dropdown>
         </Space>
@@ -205,27 +208,28 @@ export function ApplicationsList() {
             data={applications}
             columns={columns}
             onRowClick={(row) => navigate(`/applications/${row.id}`)}
+            collapsible={true}
           />
 
-          <div className="mt-4 flex justify-between items-center">
-            <div className="text-sm text-gray-700">
+          <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+            <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
               Showing {applications.length} of {totalItems} applications
             </div>
-            <div className="flex gap-2">
-              <button
+            <div className="flex gap-2 w-full sm:w-auto">
+              <Button
                 disabled={!hasPrevious || isLoading}
                 onClick={() => setPage(page - 1)}
-                className="px-4 py-2 rounded-lg font-medium bg-gray-200 text-gray-900 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 sm:flex-none"
               >
                 Previous
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={!hasNext || isLoading}
                 onClick={() => setPage(page + 1)}
-                className="px-4 py-2 rounded-lg font-medium bg-gray-200 text-gray-900 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 sm:flex-none"
               >
                 Next
-              </button>
+              </Button>
             </div>
           </div>
         </>

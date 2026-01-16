@@ -34,19 +34,19 @@ export function PaymentDetail() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center">
+      <div className="mb-4 sm:mb-6 flex items-center">
         <Button
           type="text"
           onClick={() => navigate('/payments')}
-          className="mr-4"
+          className="mr-2 sm:mr-4 flex-shrink-0"
           icon={<ArrowLeftOutlined />}
         >
-          Back
+          <span className="hidden sm:inline">Back</span>
         </Button>
-        <h1 className="text-2xl font-bold text-gray-900">Payment Details</h1>
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">Payment Details</h1>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         <Card title="Payment Information">
           <dl className="space-y-4">
             <div>
@@ -96,6 +96,7 @@ export function PaymentDetail() {
               <div className="pt-4">
                 <Button
                   onClick={() => navigate(`/applicants/${applicant.id}`)}
+                  className="w-full sm:w-auto"
                 >
                   View Applicant Details
                 </Button>

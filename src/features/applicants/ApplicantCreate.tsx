@@ -66,21 +66,21 @@ export function ApplicantCreate() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center">
+      <div className="mb-4 sm:mb-6 flex items-center">
         <Button
           type="text"
           onClick={() => navigate('/applicants')}
-          className="mr-4"
+          className="mr-2 sm:mr-4 flex-shrink-0"
           icon={<ArrowLeftOutlined />}
         >
-          Back
+          <span className="hidden sm:inline">Back</span>
         </Button>
-        <h1 className="text-2xl font-bold text-gray-900">Create New Applicant</h1>
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">Create New Applicant</h1>
       </div>
 
       <Card>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6 p-4 sm:p-6">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
             <Input
               label="First Name"
               {...register('first_name')}
@@ -191,13 +191,19 @@ export function ApplicantCreate() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
             <Button
               onClick={() => navigate('/applicants')}
+              className="w-full sm:w-auto"
             >
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" loading={isSubmitting}>
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              loading={isSubmitting}
+              className="w-full sm:w-auto"
+            >
               Create Applicant
             </Button>
           </div>
