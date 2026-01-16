@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface LayoutProps {
   children: ReactNode;
